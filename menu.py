@@ -41,6 +41,16 @@ class Menu:
         else:
             print(data)
 
+    @staticmethod
+    def print_results_with_id(data):
+        if len(data) == 0:
+            print('We got nothing. Sorry.')
+        else:
+            print('ID | Name | Country | Catches')
+            for d in data:
+                print('{0}{1}{2}{3}'
+                      .format(str(d[0]).ljust(5),str(d[1]).ljust(7),str(d[2]).ljust(10),str(d[3]).ljust(10)))
+
 
 class Dialogs:
 
@@ -54,6 +64,20 @@ class Dialogs:
         catches = Dialogs.get_int_input('Enter number of catches\n')
 
         return name, country, catches
+
+    @staticmethod
+    def show_update():
+
+        id = Dialogs.get_int_input('Enter record ID\n')
+        name = Dialogs.get_string_input("Enter name\n")
+        country = Dialogs.get_string_input("Enter country\n")
+        catches = Dialogs.get_int_input("Enter number of catches\n")
+        return id, name, country, catches
+
+    @staticmethod
+    def show_delete():
+        id = Dialogs.get_int_input('Enter record ID to delete\n')
+        return id
 
     @staticmethod
     def get_string_input(message):

@@ -54,6 +54,32 @@ def run():
 
             Menu.print_results(data)
 
+        # update a record
+        if selection == 3:
+
+            data = db.get_all()
+
+            Menu.print_results_with_id(data)
+
+            new_data = Dialogs.show_update()
+
+            db.update_prepare(new_data)
+
+        # delete a record
+        if selection == 4:
+
+            data = db.get_all()
+
+            Menu.print_results_with_id(data)
+
+            id_to_delete = Dialogs.show_delete()
+
+            db.delete_prepare(id_to_delete)
+
+            data = db.get_all()
+
+            Menu.print_results_with_id(data)
+        # exit program
         if selection == 5:
             db.close_connection()
             exit()
