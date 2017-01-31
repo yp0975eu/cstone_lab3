@@ -34,6 +34,18 @@ class DB:
         except sqlite3.Error as er:
             print('Select Error', er)
 
+    def find_by_name(self, search):
+        query = '''SELECT * FROM chainsaw_records WHERE name LIKE ? '''
+        return self.select(query, search)
+
+    def find_by_country(self, search):
+        query = '''SELECT * FROM chainsaw_records WHERE country LIKE ? '''
+        return self.select(query, search)
+
+    def find_by_catches(self, search):
+        query = '''SELECT * FROM chainsaw_records WHERE catches LIKE ? '''
+        return self.select(query, search)
+
     def close_connection(self):
 
         self.connection.close()
@@ -54,3 +66,11 @@ class DB:
 
             print("insert error", er)
 
+    def select(self, query, search):
+        try:
+            self.cursor.execute(query, ('%' + search + '%',))
+
+            return self.cursor.fetchall()
+
+        except sqlite3.Error as er:
+            print('Select Error', er)
